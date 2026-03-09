@@ -652,20 +652,18 @@ function aktualisiereWAEinheit() {
 function sendeMail() {
   const betreff = 'fabDaF – ' + _titel;
 
-  const links = _urls.map(u => '<a href="' + u + '">' + decodeURI(u.split('/').pop()).replace(/-/g,' ').replace(/\.html$/,'') + '</a>').join('<br>');
-
-  const htmlBody =
-    '<p>Hallo,</p>' +
-    '<p>hier ist dein Lernmaterial f&uuml;r die n&auml;chste Stunde:</p>' +
-    '<p>' + links + '</p>' +
-    '<p>Einfach auf den Link klicken &ndash; die &Uuml;bung &ouml;ffnet sich direkt im Browser.</p>' +
-    '<p>Viel Erfolg!</p>' +
-    '<p>&mdash; Frank Burkert &middot; fabDaF</p>';
+  const body =
+    'Hallo,\n\n' +
+    'hier ist dein Lernmaterial für die nächste Stunde:\n\n' +
+    _urls.join('\n\n') +
+    '\n\nEinfach auf den Link klicken – die Übung öffnet sich direkt im Browser.\n\n' +
+    'Viel Erfolg!\n\n' +
+    '— Frank Burkert · fabDaF';
 
   const outlookUrl = 'https://outlook.office.com/mail/deeplink/compose' +
     '?from=frankburkert%40fabdaf.onmicrosoft.com' +
     '&subject=' + encodeURIComponent(betreff) +
-    '&htmlbody=' + encodeURIComponent(htmlBody);
+    '&body=' + encodeURIComponent(body);
 
   window.open(outlookUrl, '_blank');
   schliesseModal();
