@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adjektivdeklination – Nominativ ↔ Akkusativ</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f0f2f5; color: #1a1a2e; min-height: 100vh; }
+.container { max-width: 860px; margin: 0 auto; padding: 16px; }
+h1 { text-align: center; font-size: 1.4rem; background: linear-gradient(135deg, #667eea, #764ba2);
+     -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 12px 0 4px; }
+.subtitle { text-align: center; color: #666; font-size: 0.9rem; margin-bottom: 16px; }
+
+.nav { display: flex; gap: 4px; margin-bottom: 16px; flex-wrap: wrap; }
+.nav-btn { flex: 1; min-width: 110px; padding: 10px 8px; text-align: center; background: #e8e8e8;
+           border-radius: 8px 8px 0 0; cursor: pointer; font-size: 0.85rem; font-weight: 600;
+           transition: all 0.2s; border-bottom: 3px solid transparent; }
+.nav-btn:hover { background: #d8d8f8; }
+.nav-btn.active { background: #fff; border-bottom: 3px solid #667eea; color: #667eea; }
+
+.section { display: none; background: #fff; border-radius: 0 0 12px 12px; padding: 20px;
+           box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.section.active { display: block; }
+
+.btn-row { display: flex; gap: 8px; justify-content: center; margin-top: 20px; flex-wrap: wrap; }
+.btn { padding: 10px 20px; border: none; border-radius: 8px; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.btn-check { background: linear-gradient(135deg, #667eea, #764ba2); color: #fff; }
+.btn-check:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(102,126,234,0.4); }
+.btn-show { background: #f0f0f0; color: #555; }
+.btn-show:hover { background: #e0e0e0; }
+.btn-reset { background: #fff; color: #888; border: 1px solid #ddd; }
+.btn-reset:hover { background: #f8f8f8; }
+.score { text-align: center; margin-top: 12px; font-weight: 600; color: #667eea; font-size: 1rem; }
+
+.help-toggle { background: none; border: 1px solid #667eea; color: #667eea; border-radius: 6px;
+               padding: 4px 12px; font-size: 0.8rem; cursor: pointer; margin-bottom: 12px; }
+.help-toggle:hover { background: #667eea; color: #fff; }
+.help-box { display: none; background: #f8f7ff; border-left: 3px solid #667eea; padding: 12px 16px;
+            margin-bottom: 16px; border-radius: 0 8px 8px 0; font-size: 0.85rem; line-height: 1.6; }
+.help-box.open { display: block; }
+.help-box p { margin-bottom: 6px; }
+
+/* === WORTSCHATZ === */
+.ws-item { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px; padding: 10px 14px;
+           background: #f8f7ff; border-radius: 8px; margin-bottom: 8px; font-size: 0.95rem; }
+.ws-en { font-weight: 600; color: #764ba2; min-width: 130px; }
+.ws-arrow { color: #999; }
+input.ws-input { border: none; border-bottom: 2px solid #667eea; background: transparent;
+                 font-size: 0.9rem; font-family: inherit; outline: none; padding: 2px 6px; text-align: center; }
+input.ws-input:focus { border-bottom-color: #764ba2; background: #f0eeff; }
+input.ws-input.s { min-width: 45px; width: 50px; }
+input.ws-input.m { min-width: 90px; width: 120px; }
+input.ws-input.correct { border-bottom-color: #2ecc71; background: #eafaf1; color: #27ae60; }
+input.ws-input.wrong { border-bottom-color: #e74c3c; background: #fdf0ef; color: #c0392b; }
+.ws-sol { display: none; color: #27ae60; font-weight: 600; font-size: 0.8rem; margin-left: 2px; }
+.ws-sep { color: #999; }
+
+/* === ZUORDNUNG === */
+.chip-bank { display: flex; flex-wrap: wrap; gap: 8px; padding: 12px; background: #f8f7ff;
+             border-radius: 8px; min-height: 50px; margin-bottom: 16px; justify-content: center; }
+.chip { padding: 8px 16px; background: linear-gradient(135deg, #667eea, #764ba2); color: #fff;
+        border-radius: 20px; cursor: grab; font-size: 0.9rem; user-select: none; transition: all 0.2s; }
+.chip:active { cursor: grabbing; transform: scale(1.05); }
+.chip.correct { background: linear-gradient(135deg, #2ecc71, #27ae60) !important; }
+.chip.wrong { background: linear-gradient(135deg, #e74c3c, #c0392b) !important; }
+.chip.zu-selected { outline: 2px solid #ffd700; outline-offset: 2px; }
+.categories { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+@media (max-width: 600px) { .categories { grid-template-columns: repeat(2, 1fr); } }
+.category h3 { font-size: 0.9rem; color: #667eea; margin-bottom: 6px; padding: 6px;
+               background: #f0eeff; border-radius: 6px; text-align: center; }
+.drop-zone { min-height: 70px; border: 2px dashed #d0d0e0; border-radius: 8px; padding: 8px;
+             display: flex; flex-wrap: wrap; gap: 6px; align-content: flex-start; transition: all 0.2s; }
+.drop-zone.over { border-color: #667eea; background: #f0eeff; }
+
+/* === ADJEKTIVDEKLINATION === */
+.pair-header { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-bottom: 4px;
+               border-radius: 10px 10px 0 0; overflow: hidden; }
+.pair-header div { padding: 8px 16px; font-weight: 700; font-size: 0.85rem; text-align: center; }
+.pair-header .h-nom { background: #2e8b57; color: #fff; }
+.pair-header .h-akk { background: #667eea; color: #fff; }
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-bottom: 10px; border-radius: 10px; overflow: hidden; }
+@media (max-width: 600px) { .pair { grid-template-columns: 1fr; } .pair-header { grid-template-columns: 1fr; } }
+.pair-nom, .pair-akk { padding: 12px 14px; line-height: 2.2; font-size: 0.95rem; }
+.pair-nom { background: #eef8ee; }
+.pair-akk { background: #eef0ff; }
+.num { font-weight: 700; color: #764ba2; margin-right: 6px; }
+.nowrap-group { display: inline-flex; align-items: baseline; white-space: nowrap; gap: 0; }
+input.blank { border: none; border-bottom: 2px solid; background: transparent; text-align: center;
+              font-size: 0.9rem; font-family: inherit; outline: none; padding: 2px 4px; transition: all 0.3s; }
+input.blank:focus { background: rgba(255,255,255,0.6); }
+.pair-nom input.blank { border-bottom-color: #2e8b57; }
+.pair-akk input.blank { border-bottom-color: #667eea; }
+input.blank.s { min-width: 38px; width: 42px; }
+input.blank.m { min-width: 60px; width: 70px; }
+input.blank.correct { border-bottom-color: #2ecc71 !important; background: #eafaf1; color: #27ae60; }
+input.blank.wrong { border-bottom-color: #e74c3c !important; background: #fdf0ef; color: #c0392b; }
+.sol { display: none; color: #27ae60; font-weight: 600; font-size: 0.8rem; margin-left: 2px; }
+
+/* === SATZBAU === */
+.sb-exercise { margin-bottom: 18px; }
+.sb-label { font-weight: 600; color: #764ba2; margin-bottom: 6px; font-size: 0.95rem; }
+.sb-bank { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px; background: #f8f7ff;
+           border-radius: 8px; min-height: 44px; margin-bottom: 6px; }
+.sb-row { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px; background: #fff;
+          border: 2px dashed #d0d0e0; border-radius: 8px; min-height: 44px; align-items: center; transition: all 0.2s; }
+.sb-row.over { border-color: #667eea; background: #f0eeff; }
+.sb-chip { padding: 6px 14px; background: linear-gradient(135deg, #667eea, #764ba2); color: #fff;
+           border-radius: 16px; cursor: grab; font-size: 0.9rem; user-select: none; transition: all 0.15s; }
+.sb-chip:active { cursor: grabbing; transform: scale(1.05); }
+.sb-chip.selected { outline: 2px solid #ffd700; outline-offset: 2px; }
+.sb-chip.correct { background: linear-gradient(135deg, #2ecc71, #27ae60) !important; }
+.sb-chip.wrong { background: linear-gradient(135deg, #e74c3c, #c0392b) !important; }
+.fixed-dot { font-weight: 700; font-size: 1.1rem; color: #333; padding-left: 2px; }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Adjektivdeklination: Nominativ ↔ Akkusativ</h1>
+<p class="subtitle">Familie & Verwandtschaft – sein vs. haben</p>
+
+<div class="nav">
+    <div class="nav-btn active" onclick="showSection(0)">📝 Wortschatz</div>
+    <div class="nav-btn" onclick="showSection(1)">🔀 Genus</div>
+    <div class="nav-btn" onclick="showSection(2)">✏️ Deklination</div>
+    <div class="nav-btn" onclick="showSection(3)">🧩 Satzbau</div>
+</div>
+
+<!-- ============ TAB 0: WORTSCHATZ ============ -->
+<div class="section active" id="sec-0">
+    <button class="help-toggle" onclick="toggleHelp(0)">💡 Hilfe</button>
+    <div class="help-box" id="help-0">
+        <p>🔹 Übersetze von <strong>Englisch → Deutsch</strong>.</p>
+        <p>🔹 Bei Nomen: <strong>Artikel</strong> + deutsches Wort + <strong>Plural</strong>.</p>
+    </div>
+    <div id="ws-container"></div>
+    <div class="btn-row">
+        <button class="btn btn-check" onclick="checkWS()">✔ Prüfen</button>
+        <button class="btn btn-show" onclick="showWS()">👁 Lösungen</button>
+        <button class="btn btn-reset" onclick="resetWS()">↻ Neu</button>
+    </div>
+    <div class="score" id="score-ws"></div>
+</div>
+
+<!-- ============ TAB 1: ZUORDNUNG ============ -->
+<div class="section" id="sec-1">
+    <button class="help-toggle" onclick="toggleHelp(1)">💡 Hilfe</button>
+    <div class="help-box" id="help-1">
+        <p>🔹 Sortiere die Familienmitglieder nach ihrem <strong>Genus</strong> (Artikel).</p>
+        <p>🔹 Klicke auf ein Wort, dann auf die Kategorie – oder ziehe es direkt.</p>
+    </div>
+    <div class="chip-bank" id="zu-bank"></div>
+    <div class="categories">
+        <div class="category" data-cat="m"><h3>der</h3><div class="drop-zone"></div></div>
+        <div class="category" data-cat="f"><h3>die</h3><div class="drop-zone"></div></div>
+        <div class="category" data-cat="n"><h3>das</h3><div class="drop-zone"></div></div>
+        <div class="category" data-cat="pl"><h3>die (Pl.)</h3><div class="drop-zone"></div></div>
+    </div>
+    <div class="btn-row">
+        <button class="btn btn-check" onclick="checkZU()">✔ Prüfen</button>
+        <button class="btn btn-show" onclick="showZU()">👁 Lösungen</button>
+        <button class="btn btn-reset" onclick="resetZU()">↻ Neu</button>
+    </div>
+    <div class="score" id="score-zu"></div>
+</div>
+
+<!-- ============ TAB 2: DEKLINATION ============ -->
+<div class="section" id="sec-2">
+    <button class="help-toggle" onclick="toggleHelp(2)">💡 Hilfe</button>
+    <div class="help-box" id="help-2">
+        <p>🔹 Links <span style="color:#2e8b57;font-weight:700;">grün</span>: <strong>sein</strong> + Nominativ — Rechts <span style="color:#667eea;font-weight:700;">blau</span>: <strong>haben</strong> + Akkusativ</p>
+        <p>🔹 Ergänze die Konjugation (<em>ha+?</em>, <em>sein</em>) und die Endungen (<em>mei+?</em>, <em>ein+?</em>, Adjektiv+?).</p>
+        <p>🔹 Achte auf den Unterschied: Nur beim <strong>Maskulin</strong> ändert sich die Endung im Akkusativ!</p>
+        <p>🔹 <strong>Plural:</strong> „ein" hat keinen Plural – „ein" bedeutet „1" und kann nicht plural sein.</p>
+    </div>
+    <div class="pair-header">
+        <div class="h-nom">Nominativ – sein</div>
+        <div class="h-akk">Akkusativ – haben</div>
+    </div>
+    <div id="dekl-container"></div>
+    <div class="btn-row">
+        <button class="btn btn-check" onclick="checkDK()">✔ Prüfen</button>
+        <button class="btn btn-show" onclick="showDK()">👁 Lösungen</button>
+        <button class="btn btn-reset" onclick="resetDK()">↻ Neu</button>
+    </div>
+    <div class="score" id="score-dk"></div>
+</div>
+
+<!-- ============ TAB 3: SATZBAU ============ -->
+<div class="section" id="sec-3">
+    <button class="help-toggle" onclick="toggleHelp(3)">💡 Hilfe</button>
+    <div class="help-box" id="help-3">
+        <p>🔹 Bringe die Satzteile in die richtige Reihenfolge.</p>
+        <p>🔹 Das Verb steht immer auf <strong>Position 2</strong>.</p>
+    </div>
+    <div id="sb-container"></div>
+    <div class="btn-row">
+        <button class="btn btn-check" onclick="checkSB()">✔ Prüfen</button>
+        <button class="btn btn-show" onclick="showSB()">👁 Lösungen</button>
+        <button class="btn btn-reset" onclick="resetSB()">↻ Neu</button>
+    </div>
+    <div class="score" id="score-sb"></div>
+</div>
+
+</div>
+
+<script>
+// ============ NAV & UTILS ============
+function showSection(i){document.querySelectorAll('.section').forEach((s,j)=>s.classList.toggle('active',j===i));document.querySelectorAll('.nav-btn').forEach((b,j)=>b.classList.toggle('active',j===i));}
+function toggleHelp(i){document.getElementById('help-'+i).classList.toggle('open');}
+function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;}
+
+// ============ TAB 0: WORTSCHATZ ============
+const WS=[
+    {id:1,type:"n",en:"father",artikel:"der",de:"Vater",plural:"Väter"},
+    {id:2,type:"n",en:"brother",artikel:"der",de:"Bruder",plural:"Brüder"},
+    {id:3,type:"n",en:"son",artikel:"der",de:"Sohn",plural:"Söhne"},
+    {id:4,type:"n",en:"uncle",artikel:"der",de:"Onkel",plural:"Onkel"},
+    {id:5,type:"n",en:"mother",artikel:"die",de:"Mutter",plural:"Mütter"},
+    {id:6,type:"n",en:"sister",artikel:"die",de:"Schwester",plural:"Schwestern"},
+    {id:7,type:"n",en:"niece",artikel:"die",de:"Nichte",plural:"Nichten"},
+    {id:8,type:"n",en:"grandma",artikel:"die",de:"Oma",plural:"Omas"},
+    {id:9,type:"n",en:"child",artikel:"das",de:"Kind",plural:"Kinder"},
+    {id:10,type:"a",en:"old",de:"alt"},
+    {id:11,type:"a",en:"big / tall",de:"groß"},
+    {id:12,type:"a",en:"hard-working",de:"fleißig"},
+    {id:13,type:"a",en:"rich",de:"reich"},
+    {id:14,type:"a",en:"dear / lovely",de:"lieb"},
+    {id:15,type:"a",en:"pretty",de:"hübsch"},
+    {id:16,type:"a",en:"small / little",de:"klein"},
+    {id:17,type:"v",en:"to be",de:"sein"},
+    {id:18,type:"v",en:"to have",de:"haben"}
+];
+function initWS(){
+    const c=document.getElementById('ws-container');c.innerHTML='';document.getElementById('score-ws').textContent='';
+    WS.forEach(w=>{
+        const d=document.createElement('div');d.className='ws-item';
+        const en=document.createElement('span');en.className='ws-en';en.textContent=w.en;d.appendChild(en);
+        d.appendChild(mkSp(' → ','ws-arrow'));
+        if(w.type==='n'){
+            d.appendChild(mkWI(w.id,0,w.artikel,'s'));d.appendChild(mkWSol(w.artikel));d.appendChild(mkSp(' '));
+            d.appendChild(mkWI(w.id,1,w.de,'m'));d.appendChild(mkWSol(w.de));d.appendChild(mkSp(', Pl.: '));
+            d.appendChild(mkWI(w.id,2,w.plural,'m'));d.appendChild(mkWSol(w.plural));
+        } else {d.appendChild(mkWI(w.id,0,w.de,'m'));d.appendChild(mkWSol(w.de));}
+        c.appendChild(d);
+    });
+}
+function mkWI(id,idx,ans,sz){const i=document.createElement('input');i.type='text';i.className='ws-input '+sz;i.dataset.answer=ans;i.autocomplete='off';i.spellcheck=false;return i;}
+function mkWSol(t){const s=document.createElement('span');s.className='ws-sol';s.textContent=t;return s;}
+function mkSp(t,cl){const s=document.createElement('span');s.className=cl||'ws-sep';s.textContent=t;return s;}
+function checkWS(){let ok=0,tot=0;document.querySelectorAll('.ws-input').forEach(i=>{tot++;const v=i.value.trim(),c=v.toLowerCase()===i.dataset.answer.toLowerCase();i.classList.toggle('correct',c);i.classList.toggle('wrong',!c&&v!=='');if(c)ok++;});document.getElementById('score-ws').textContent=ok+' von '+tot+' richtig';}
+function showWS(){let t=0;document.querySelectorAll('.ws-input').forEach(i=>{t++;i.value=i.dataset.answer;i.classList.add('correct');i.classList.remove('wrong');i.disabled=true;});document.getElementById('score-ws').textContent=t+' von '+t+' richtig';}
+function resetWS(){initWS();}
+
+// ============ TAB 1: ZUORDNUNG ============
+const ZU=[
+    {word:"Vater",cat:"m"},{word:"Bruder",cat:"m"},{word:"Sohn",cat:"m"},{word:"Onkel",cat:"m"},
+    {word:"Mutter",cat:"f"},{word:"Schwester",cat:"f"},{word:"Nichte",cat:"f"},{word:"Oma",cat:"f"},
+    {word:"Kind",cat:"n"},
+    {word:"Schwestern",cat:"pl"},{word:"Eltern",cat:"pl"},{word:"Großeltern",cat:"pl"}
+];
+let zuSel=null;
+function initZU(){
+    zuSel=null;document.getElementById('score-zu').textContent='';
+    const bank=document.getElementById('zu-bank');bank.innerHTML='';
+    document.querySelectorAll('#sec-1 .drop-zone').forEach(dz=>dz.innerHTML='');
+    shuffle(ZU).forEach((item,idx)=>{
+        const ch=document.createElement('div');ch.className='chip';ch.textContent=item.word;
+        ch.dataset.cat=item.cat;ch.dataset.idx=idx;ch.draggable=true;
+        ch.addEventListener('dragstart',e=>{e.dataTransfer.setData('text/plain',idx);ch.style.opacity='0.5';});
+        ch.addEventListener('dragend',()=>ch.style.opacity='1');
+        ch.addEventListener('click',()=>{if(zuSel===ch){ch.classList.remove('zu-selected');zuSel=null;return;}if(zuSel)zuSel.classList.remove('zu-selected');zuSel=ch;ch.classList.add('zu-selected');});
+        bank.appendChild(ch);
+    });
+    document.querySelectorAll('#sec-1 .drop-zone').forEach(dz=>{
+        dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('over');});
+        dz.addEventListener('dragleave',()=>dz.classList.remove('over'));
+        dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('over');const id=e.dataTransfer.getData('text/plain');const ch=document.querySelector(`.chip[data-idx="${id}"]`);if(ch){ch.classList.remove('correct','wrong');dz.appendChild(ch);}});
+        dz.addEventListener('click',()=>{if(zuSel){zuSel.classList.remove('correct','wrong','zu-selected');dz.appendChild(zuSel);zuSel=null;}});
+    });
+    bank.addEventListener('dragover',e=>e.preventDefault());
+    bank.addEventListener('drop',e=>{e.preventDefault();const id=e.dataTransfer.getData('text/plain');const ch=document.querySelector(`.chip[data-idx="${id}"]`);if(ch){ch.classList.remove('correct','wrong');bank.appendChild(ch);}});
+    bank.addEventListener('click',e=>{if(zuSel&&e.target===bank){zuSel.classList.remove('correct','wrong','zu-selected');bank.appendChild(zuSel);zuSel=null;}});
+}
+function checkZU(){let ok=0,tot=0;document.querySelectorAll('#sec-1 .drop-zone .chip').forEach(ch=>{tot++;const cat=ch.closest('.category').dataset.cat;const c=ch.dataset.cat===cat;ch.classList.toggle('correct',c);ch.classList.toggle('wrong',!c);if(c)ok++;});tot+=document.querySelectorAll('#zu-bank .chip').length;document.getElementById('score-zu').textContent=ok+' von '+ZU.length+' richtig';}
+function showZU(){document.querySelectorAll('#sec-1 .chip').forEach(ch=>{const dz=document.querySelector(`#sec-1 .category[data-cat="${ch.dataset.cat}"] .drop-zone`);if(dz){ch.classList.add('correct');ch.classList.remove('wrong');dz.appendChild(ch);}});document.getElementById('score-zu').textContent=ZU.length+' von '+ZU.length+' richtig';}
+function resetZU(){initZU();}
+
+// ============ TAB 2: DEKLINATION ============
+const DK=[
+    // MASKULIN (4) — Nom: mei+n, Adj+er / Akk: ein+en, Adj+en
+    {nom:{seg:[{t:"Er "},{b:"ist",s:"m"},{t:" mei"},{b:"n",s:"s"},{t:" alt"},{b:"er",s:"s"},{t:" Vater."}]},
+     akk:{seg:[{t:"Ich ha"},{b:"be",s:"s"},{t:" ein"},{b:"en",s:"s"},{t:" alt"},{b:"en",s:"s"},{t:" Vater."}]}},
+    {nom:{seg:[{t:"Du "},{b:"bist",s:"m"},{t:" mei"},{b:"n",s:"s"},{t:" groß"},{b:"er",s:"s"},{t:" Bruder."}]},
+     akk:{seg:[{t:"Sie ha"},{b:"t",s:"s"},{t:" ein"},{b:"en",s:"s"},{t:" groß"},{b:"en",s:"s"},{t:" Bruder."}]}},
+    {nom:{seg:[{t:"Er "},{b:"ist",s:"m"},{t:" mei"},{b:"n",s:"s"},{t:" fleißig"},{b:"er",s:"s"},{t:" Sohn."}]},
+     akk:{seg:[{t:"Wir ha"},{b:"ben",s:"s"},{t:" ein"},{b:"en",s:"s"},{t:" fleißig"},{b:"en",s:"s"},{t:" Sohn."}]}},
+    {nom:{seg:[{t:"Er "},{b:"ist",s:"m"},{t:" mei"},{b:"n",s:"s"},{t:" reich"},{b:"er",s:"s"},{t:" Onkel."}]},
+     akk:{seg:[{t:"Du ha"},{b:"st",s:"s"},{t:" ein"},{b:"en",s:"s"},{t:" reich"},{b:"en",s:"s"},{t:" Onkel."}]}},
+    // FEMININ (4) — Nom: mei+ne, Adj+e / Akk: ein+e, Adj+e (identisch!)
+    {nom:{seg:[{t:"Sie "},{b:"ist",s:"m"},{t:" mei"},{b:"ne",s:"s"},{t:" lieb"},{b:"e",s:"s"},{t:" Mutter."}]},
+     akk:{seg:[{t:"Ich ha"},{b:"be",s:"s"},{t:" ein"},{b:"e",s:"s"},{t:" lieb"},{b:"e",s:"s"},{t:" Mutter."}]}},
+    {nom:{seg:[{t:"Du "},{b:"bist",s:"m"},{t:" mei"},{b:"ne",s:"s"},{t:" nervig"},{b:"e",s:"s"},{t:" Schwester."}]},
+     akk:{seg:[{t:"Er ha"},{b:"t",s:"s"},{t:" ein"},{b:"e",s:"s"},{t:" nervig"},{b:"e",s:"s"},{t:" Schwester."}]}},
+    {nom:{seg:[{t:"Sie "},{b:"ist",s:"m"},{t:" mei"},{b:"ne",s:"s"},{t:" hübsch"},{b:"e",s:"s"},{t:" Nichte."}]},
+     akk:{seg:[{t:"Wir ha"},{b:"ben",s:"s"},{t:" ein"},{b:"e",s:"s"},{t:" hübsch"},{b:"e",s:"s"},{t:" Nichte."}]}},
+    {nom:{seg:[{t:"Sie "},{b:"ist",s:"m"},{t:" mei"},{b:"ne",s:"s"},{t:" klug"},{b:"e",s:"s"},{t:" Oma."}]},
+     akk:{seg:[{t:"Ihr ha"},{b:"bt",s:"s"},{t:" ein"},{b:"e",s:"s"},{t:" klug"},{b:"e",s:"s"},{t:" Oma."}]}},
+    // NEUTRUM (1) — Nom: mei+n, Adj+es / Akk: ei+n, Adj+es (identisch!)
+    {nom:{seg:[{t:"Es "},{b:"ist",s:"m"},{t:" mei"},{b:"n",s:"s"},{t:" klein"},{b:"es",s:"s"},{t:" Kind."}]},
+     akk:{seg:[{t:"Sie ha"},{b:"t",s:"s"},{t:" ei"},{b:"n",s:"s"},{t:" klein"},{b:"es",s:"s"},{t:" Kind."}]}},
+    // PLURAL (3) — Nom: mei+ne, Adj+en / Akk: KEIN Artikel, Adj+e
+    {nom:{seg:[{t:"Ihr "},{b:"seid",s:"m"},{t:" mei"},{b:"ne",s:"s"},{t:" laut"},{b:"en",s:"s"},{t:" Schwestern."}]},
+     akk:{seg:[{t:"Ich ha"},{b:"be",s:"s"},{t:" laut"},{b:"e",s:"s"},{t:" Schwestern."}]}},
+    {nom:{seg:[{t:"Sie "},{b:"sind",s:"m"},{t:" mei"},{b:"ne",s:"s"},{t:" lieb"},{b:"en",s:"s"},{t:" Eltern."}]},
+     akk:{seg:[{t:"Du ha"},{b:"st",s:"s"},{t:" lieb"},{b:"e",s:"s"},{t:" Eltern."}]}},
+    {nom:{seg:[{t:"Sie "},{b:"sind",s:"m"},{t:" mei"},{b:"ne",s:"s"},{t:" alt"},{b:"en",s:"s"},{t:" Großeltern."}]},
+     akk:{seg:[{t:"Wir ha"},{b:"ben",s:"s"},{t:" alt"},{b:"e",s:"s"},{t:" Großeltern."}]}}
+];
+
+function renderSide(segments,container){
+    let prevFrag=false,group=null;
+    segments.forEach((seg,si)=>{
+        if(seg.t!==undefined){
+            const next=segments[si+1];
+            const frag=seg.t.length>0&&!seg.t.endsWith(' ')&&seg.t!=='.'&&next&&next.b!==undefined;
+            if(frag){group=document.createElement('span');group.className='nowrap-group';const sp=document.createElement('span');sp.textContent=seg.t;group.appendChild(sp);prevFrag=true;}
+            else{const sp=document.createElement('span');sp.textContent=seg.t;container.appendChild(sp);prevFrag=false;group=null;}
+        }else{
+            const inp=document.createElement('input');inp.type='text';inp.className='blank '+seg.s;
+            inp.dataset.answer=seg.b;inp.autocomplete='off';inp.spellcheck=false;
+            const sol=document.createElement('span');sol.className='sol';sol.textContent=seg.b;
+            if(prevFrag&&group){group.appendChild(inp);group.appendChild(sol);container.appendChild(group);group=null;prevFrag=false;}
+            else{container.appendChild(inp);container.appendChild(sol);}
+        }
+    });
+}
+function initDK(){
+    const c=document.getElementById('dekl-container');c.innerHTML='';document.getElementById('score-dk').textContent='';
+    DK.forEach((pair,i)=>{
+        const row=document.createElement('div');row.className='pair';
+        const nom=document.createElement('div');nom.className='pair-nom';
+        const nN=document.createElement('span');nN.className='num';nN.textContent=(i+1)+'.';nom.appendChild(nN);
+        renderSide(pair.nom.seg,nom);
+        const akk=document.createElement('div');akk.className='pair-akk';
+        const nA=document.createElement('span');nA.className='num';nA.textContent=(i+1)+'.';akk.appendChild(nA);
+        renderSide(pair.akk.seg,akk);
+        row.appendChild(nom);row.appendChild(akk);c.appendChild(row);
+    });
+}
+function checkDK(){let ok=0,tot=0;document.querySelectorAll('#sec-2 input.blank').forEach(inp=>{tot++;const v=inp.value.trim(),c=v.toLowerCase()===inp.dataset.answer.toLowerCase();inp.classList.toggle('correct',c);inp.classList.toggle('wrong',!c&&v!=='');if(c)ok++;});document.getElementById('score-dk').textContent=ok+' von '+tot+' richtig';}
+function showDK(){let t=0;document.querySelectorAll('#sec-2 input.blank').forEach(inp=>{t++;inp.value=inp.dataset.answer;inp.classList.add('correct');inp.classList.remove('wrong');inp.disabled=true;});document.getElementById('score-dk').textContent=t+' von '+t+' richtig';}
+function resetDK(){initDK();}
+
+// ============ TAB 3: SATZBAU ============
+const SB=[
+    {id:1,parts:["mein alter Vater","ist","sehr nett"],valid:[["mein alter Vater","ist","sehr nett"]]},
+    {id:2,parts:["ich","habe","einen großen Bruder"],valid:[["ich","habe","einen großen Bruder"]]},
+    {id:3,parts:["meine liebe Mutter","ist","sehr klug"],valid:[["meine liebe Mutter","ist","sehr klug"]]},
+    {id:4,parts:["du","hast","eine nervige Schwester"],valid:[["du","hast","eine nervige Schwester"]]},
+    {id:5,parts:["mein kleines Kind","ist","sehr süß"],valid:[["mein kleines Kind","ist","sehr süß"]]},
+    {id:6,parts:["wir","haben","alte Großeltern"],valid:[["wir","haben","alte Großeltern"]]}
+];
+let sbSel=null;
+function initSB(){
+    const c=document.getElementById('sb-container');c.innerHTML='';document.getElementById('score-sb').textContent='';sbSel=null;
+    SB.forEach(ex=>{
+        const w=document.createElement('div');w.className='sb-exercise';
+        const lbl=document.createElement('div');lbl.className='sb-label';lbl.textContent='Satz '+ex.id;w.appendChild(lbl);
+        const bank=document.createElement('div');bank.className='sb-bank';bank.dataset.sbId=ex.id;
+        const row=document.createElement('div');row.className='sb-row';row.dataset.sbId=ex.id;
+        const dot=document.createElement('span');dot.className='fixed-dot';dot.textContent='.';row.appendChild(dot);
+        shuffle(ex.parts).forEach(p=>{
+            const ch=document.createElement('div');ch.className='sb-chip';ch.textContent=p;ch.dataset.orig=p;ch.dataset.sbId=ex.id;ch.draggable=true;
+            ch.addEventListener('dragstart',e=>{e.dataTransfer.setData('text/plain',p);e.dataTransfer.setData('sb-id',ex.id);ch.style.opacity='0.5';});
+            ch.addEventListener('dragend',()=>ch.style.opacity='1');
+            ch.addEventListener('click',()=>handleSbClick(ch,ex.id));
+            bank.appendChild(ch);
+        });
+        row.addEventListener('dragover',e=>{e.preventDefault();row.classList.add('over');});
+        row.addEventListener('dragleave',()=>row.classList.remove('over'));
+        row.addEventListener('drop',e=>{
+            e.preventDefault();row.classList.remove('over');
+            const pt=e.dataTransfer.getData('text/plain'),sid=e.dataTransfer.getData('sb-id');
+            if(String(sid)!==String(ex.id))return;
+            const ch=[...document.querySelectorAll(`.sb-chip[data-sb-id="${ex.id}"]`)].find(c=>c.dataset.orig===pt);
+            if(!ch)return;ch.classList.remove('correct','wrong');
+            const chips=[...row.querySelectorAll('.sb-chip')];let ins=false;
+            for(const x of chips){if(x===ch)continue;const r=x.getBoundingClientRect();if(e.clientX<r.left+r.width/2){row.insertBefore(ch,x);ins=true;break;}}
+            if(!ins)row.insertBefore(ch,dot);updateCaps(ex.id);
+        });
+        bank.addEventListener('dragover',e=>e.preventDefault());
+        bank.addEventListener('drop',e=>{
+            e.preventDefault();const pt=e.dataTransfer.getData('text/plain'),sid=e.dataTransfer.getData('sb-id');
+            if(String(sid)!==String(ex.id))return;
+            const ch=[...document.querySelectorAll(`.sb-chip[data-sb-id="${ex.id}"]`)].find(c=>c.dataset.orig===pt);
+            if(ch){ch.classList.remove('correct','wrong');bank.appendChild(ch);updateCaps(ex.id);}
+        });
+        w.appendChild(bank);w.appendChild(row);c.appendChild(w);
+    });
+}
+function handleSbClick(chip,exId){
+    const row=document.querySelector(`.sb-row[data-sb-id="${exId}"]`),bank=document.querySelector(`.sb-bank[data-sb-id="${exId}"]`),dot=row.querySelector('.fixed-dot');
+    const inRow=chip.parentElement===row,inBank=chip.parentElement===bank;
+    if(sbSel===chip){chip.classList.remove('selected');sbSel=null;return;}
+    if(sbSel&&sbSel.dataset.sbId===String(exId)){if(sbSel.parentElement===row&&inRow){row.insertBefore(sbSel,chip);sbSel.classList.remove('selected');sbSel=null;updateCaps(exId);return;}sbSel.classList.remove('selected');sbSel=null;}
+    if(inBank){chip.classList.remove('correct','wrong');row.insertBefore(chip,dot);updateCaps(exId);}
+    else if(inRow){sbSel=chip;chip.classList.add('selected');const rh=()=>{if(sbSel===chip){chip.classList.remove('selected','correct','wrong');bank.appendChild(chip);sbSel=null;updateCaps(exId);}bank.removeEventListener('click',rh);};bank.addEventListener('click',rh);}
+}
+function updateCaps(exId){
+    const row=document.querySelector(`.sb-row[data-sb-id="${exId}"]`),bank=document.querySelector(`.sb-bank[data-sb-id="${exId}"]`);
+    [...row.querySelectorAll('.sb-chip'),...bank.querySelectorAll('.sb-chip')].forEach(c=>{if(c.dataset.orig)c.textContent=c.dataset.orig;});
+    const f=row.querySelector('.sb-chip');
+    if(f&&f.textContent!=='.')f.textContent=f.textContent.charAt(0).toUpperCase()+f.textContent.slice(1);
+}
+function checkSB(){let ok=0;SB.forEach(ex=>{const row=document.querySelector(`.sb-row[data-sb-id="${ex.id}"]`);const chips=[...row.querySelectorAll('.sb-chip')];const order=chips.map(c=>c.dataset.orig);const valid=ex.valid.some(v=>v.length===order.length&&v.every((p,i)=>p===order[i]));chips.forEach(c=>{c.classList.toggle('correct',valid);c.classList.toggle('wrong',!valid);});if(valid)ok++;});document.getElementById('score-sb').textContent=ok+' von '+SB.length+' richtig';}
+function showSB(){SB.forEach(ex=>{const row=document.querySelector(`.sb-row[data-sb-id="${ex.id}"]`),bank=document.querySelector(`.sb-bank[data-sb-id="${ex.id}"]`),dot=row.querySelector('.fixed-dot');[...row.querySelectorAll('.sb-chip')].forEach(c=>bank.appendChild(c));ex.valid[0].forEach(p=>{const ch=[...bank.querySelectorAll('.sb-chip')].find(c=>c.dataset.orig===p);if(ch){ch.classList.add('correct');ch.classList.remove('wrong');row.insertBefore(ch,dot);}});updateCaps(ex.id);});document.getElementById('score-sb').textContent=SB.length+' von '+SB.length+' richtig';}
+function resetSB(){initSB();}
+
+// ============ INIT ============
+initWS();initZU();initDK();initSB();
+</script>
+<div class="author-footer">
+  <span class="author-name">&copy; Frank Burkert</span> &middot; DaF-Materialien &middot;
+  <a href="mailto:FrankBurkert@fabdaf.onmicrosoft.com">FrankBurkert@fabdaf.onmicrosoft.com</a>
+</div>
+</body>
+</html>
