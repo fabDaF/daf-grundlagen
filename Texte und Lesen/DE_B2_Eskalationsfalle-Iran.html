@@ -28,10 +28,15 @@ body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background
 .ve-table td:first-child { font-weight: 600; color: #4a148c; white-space: nowrap; width: 35%; }
 .ve-table td:last-child { color: #555; line-height: 1.5; }
 
-/* Originaltext */
+/* Originaltext / Dialog */
 .text-block { line-height: 1.8; color: #333; font-size: 1.0em; font-family: Georgia, 'Times New Roman', serif; }
 .text-block p { margin-bottom: 14px; text-align: justify; }
 .source { margin-top: 20px; font-size: 0.8em; color: #999; font-style: italic; }
+.dialog { margin-bottom: 16px; }
+.dialog .speaker { font-weight: 700; color: #4a148c; margin-bottom: 2px; font-size: 0.85em; text-transform: uppercase; letter-spacing: 0.5px; }
+.dialog .speaker.host { color: #2c3e50; }
+.dialog .speaker.guest { color: #4a148c; }
+.dialog .utterance { margin-left: 0; margin-bottom: 14px; line-height: 1.75; text-align: justify; }
 
 /* Genus */
 .genus-bank { display: flex; flex-wrap: wrap; gap: 8px; padding: 14px; background: #f8f8f8; border-radius: 10px; min-height: 56px; margin-bottom: 16px; }
@@ -107,7 +112,7 @@ body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background
 <div class="container">
     <div class="header">
         <h1>Die Eskalationsfalle</h1>
-        <p style="font-family: Georgia, serif;">B2 &middot; Sachtext &middot; Geopolitik</p>
+        <p style="font-family: Georgia, serif;">B2 &middot; Podcast-Interview &middot; Geopolitik</p>
         <div class="big-emoji">⚠️</div>
     </div>
 
@@ -144,20 +149,72 @@ body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background
     <div class="section" id="sec-1">
         <div style="padding: 28px 30px;">
             <h2 style="color:#4a148c; margin-bottom:16px;">📄 Originaltext</h2>
+            <p style="margin-bottom:14px; color:#555; font-size:0.9em;"><em>Podcast-Interview mit Prof. Robert Pape (University of Chicago). Moderator: Steven Bartlett. Übersetzt und leicht gekürzt.</em></p>
             <div class="text-block">
                 <p><strong>Die Eskalationsfalle — Warum Bomben Kriege nicht beenden</strong></p>
 
-                <p>Professor Robert Pape von der Universität Chicago hat 20 Jahre lang Kriegssimulationen über einen möglichen Iran-Konflikt durchgeführt. Seine Kernthese lautet: Bomben treffen Ziele, aber sie verändern die Politik nicht. In der Ära der Präzisionswaffen konzentrieren sich Öffentlichkeit und Medien auf den taktischen Erfolg einzelner Luftschläge. Doch Kriege werden nicht allein durch militärische Operationen entschieden — sie werden durch politische Dynamiken bestimmt.</p>
+                <div class="dialog"><div class="speaker host">Moderator</div>
+                <p class="utterance">Sie haben 20 Jahre lang Simulationen über einen Krieg mit dem Iran durchgeführt. Was ist die Schlagzeile, die die Menschen kennen müssen?</p></div>
 
-                <p>Pape beschreibt drei Stufen der Eskalation. In <strong>Stufe eins</strong> bombardierten die USA im Juni 2025 iranische Atomanlagen wie Natans und Fordo. Die Bomben zerstörten über 90 Prozent der Gebäude. Doch das eigentliche Ziel — das angereicherte Uran — blieb unauffindbar. Satellitenbilder zeigten, dass der Iran bereits zwei Tage vor dem Angriff Lastwagen von den Anlagen wegfahren ließ. Nach Papes Einschätzung verfügte der Iran zu diesem Zeitpunkt über genügend Material für 16 Atombomben. Keiner wusste, wo sich dieses Material befand.</p>
+                <div class="dialog"><div class="speaker guest">Prof. Pape</div>
+                <p class="utterance">Dass Bomben nicht nur Ziele treffen — sie verändern die Politik. Bevor die Bomben fallen, konzentrieren wir uns auf den taktischen Erfolg: Haben die Bomben die Ziele getroffen? Und mit den Präzisionswaffen ist das fast hypnotisierend — sie treffen und zerstören das Ziel zu 90 Prozent. Das Problem ist: Kriege drehen sich nicht nur um die Hardware. Sie drehen sich um Politik. Und wenn die Bomben fallen, verändert sich die Politik — beim Feind und beim Angreifer. Diese Schwelle ist der Beginn dessen, was ich die Eskalationsfalle nenne.</p></div>
 
-                <p>In <strong>Stufe zwei</strong> schlug der Iran mit einer Strategie der horizontalen Eskalation zurück. Statt die USA direkt anzugreifen, richteten sich iranische Drohnenangriffe gegen Verbündete in der Region: Saudi-Arabien, die Vereinigten Arabischen Emirate und andere Koalitionspartner. Ziel war es, die Koalition gegen den Iran zu spalten. Hotels, Flughäfen und Touristenziele wurden getroffen. Der Tourismus — fünf bis zehn Prozent des Bruttoinlandsprodukts dieser Länder — brach ein. Menschen flohen, und die betroffenen Staaten gerieten unter enormen innenpolitischen Druck.</p>
+                <div class="dialog"><div class="speaker host">Moderator</div>
+                <p class="utterance">Was genau ist im Juni passiert? Für alle, die es nicht mitbekommen haben.</p></div>
 
-                <p>Die gefährlichste Phase ist <strong>Stufe drei</strong>: der Regimewechsel. Da die USA das verschwundene Nuklearmaterial nicht lokalisieren konnten, griffen sie zur politischen Lösung und versuchten, die iranische Führung zu stürzen. Doch Pape warnt: Regime wie das iranische funktionieren nicht wie ein Jenga-Turm, bei dem ein herausgezogener Stein alles zum Einsturz bringt. Sie gleichen eher einer Matrix — einem anpassungsfähigen Netzwerk, das Verluste kompensiert und sich reorganisiert. Als die USA den Obersten Führer eliminierten, rückte sein Sohn nach — ein Mann, der als deutlich aggressiver gilt und der die religiöse Fatwa gegen Atomwaffen seines Vaters nicht erneuerte.</p>
+                <div class="dialog"><div class="speaker guest">Prof. Pape</div>
+                <p class="utterance">Im Juni haben die USA Natans und Fordo bombardiert. Und was sieht man sofort? Über 90 Prozent — diese B-2-Bomber werden diese Ziele zerstören. Aber wir wissen nicht, wo das Nuklearmaterial ist. Der ganze Sinn war nicht, ein Gebäude zu zerstören. Es ging darum, an das angereicherte Uran zu kommen. Letzten Mai war klar: Sie hatten Material für 16 Atombomben. 1-6. Und nach der Simulation wussten wir nicht, wo eine einzige Unze davon war. Wir haben ein Satellitenbild, das zeigt: Zwei Tage bevor wir Fordo bombardiert haben, fahren Lastwagen Sachen weg. Was transportiert man wohl, wenn Amerika gleich deine Anlage bombardiert? Ich glaube nicht, dass sie das Popcorn rausbringen.</p></div>
 
-                <p>Pape nennt dieses Muster die Eskalationsfalle: Jeder militärische Schlag erzeugt eine politische Gegenreaktion, die den Konflikt verschärft statt ihn zu lösen. Die Geschichte zeigt ähnliche Muster — von der Bombardierung Libyens 1986, die zum Anschlag auf Pan-Am-Flug 103 führte, bis zum Kosovo-Krieg 1999. Der Iran, so Pape, gewinne derzeit den Eskalationskrieg, weil er sich seit Jahrzehnten auf genau dieses Szenario vorbereitet habe: nicht auf den Sieg im konventionellen Krieg, sondern auf Resilienz und asymmetrische Vergeltung.</p>
+                <div class="dialog"><div class="speaker host">Moderator</div>
+                <p class="utterance">Und dann kamen die Verhandlungen — aber warum verhandelt man überhaupt mit dem Iran, wenn man das Programm angeblich zerstört hat?</p></div>
+
+                <div class="dialog"><div class="speaker guest">Prof. Pape</div>
+                <p class="utterance">Genau. Warum reden wir überhaupt mit ihnen? Wenn wir das Programm wirklich ausgelöscht haben, worüber verhandeln wir dann? Die Öffentlichkeit dachte, es sei vorbei. Aber die Geheimdienste — die Israelis, unsere Defense Intelligence Agency — ihre Berichte sagen alle dasselbe: Wir haben Löcher geschaffen. Wir haben wahrscheinlich die unterirdischen Kammern erschüttert. Aber wir haben keine Ahnung, wo das angereicherte Uran ist.</p></div>
+
+                <div class="dialog"><div class="speaker host">Moderator</div>
+                <p class="utterance">Und im Februar 2026?</p></div>
+
+                <div class="dialog"><div class="speaker guest">Prof. Pape</div>
+                <p class="utterance">Im Februar greifen wir wieder an, diesmal mit Regimewechsel. Wir gehen nicht mal mehr hinter das physische Material — wir wissen nicht, wo es ist. Also eliminieren wir die Führung. Aber der Oberste Führer, den wir getötet haben — dieser Mann hatte zwei Fatwas erlassen. Das sind religiöse Edikte, so etwas wie ein päpstlicher Erlass. Und diese Fatwas sagten: Der Iran soll keine Atomwaffen haben. Der Mann, den wir getötet haben, war eine der Leitplanken gegen Atomwaffen.</p></div>
+
+                <div class="dialog"><div class="speaker host">Moderator</div>
+                <p class="utterance">Aber er hat doch das Uran anreichern lassen?</p></div>
+
+                <div class="dialog"><div class="speaker guest">Prof. Pape</div>
+                <p class="utterance">Nein, nein — er hat das Anreicherungsmaterial entwickelt. Es war noch nicht zu Atomwaffen verarbeitet worden. Jetzt haben wir die Person eliminiert, die an der Spitze die Falken und die Tauben ausbalanciert hat. Sein Sohn hat übernommen — der neue Oberste Führer. Keine Fatwa. Die Fatwa ist mit dem Vater gestorben. Dieser Sohn ist bekannt dafür, viel aggressiver zu sein. Er war für die Polizei zuständig, die die Demonstranten tötet.</p></div>
+
+                <div class="dialog"><div class="speaker host">Moderator</div>
+                <p class="utterance">Viele Leute denken: Wenn man den Führer ausschaltet, fällt das Regime wie ein Jenga-Turm zusammen.</p></div>
+
+                <div class="dialog"><div class="speaker guest">Prof. Pape</div>
+                <p class="utterance">Das ist das falsche Bild. Das iranische Regime ist eher wie eine Matrix. Es ist nicht brüchig. Man kann Teile herausziehen, aber die Matrix passt sich an und füllt die Lücken. Und nicht mit einem Schwächling — das System hat Anreize, mit jemandem zurückzuschlagen, der noch aggressiver ist. Als wir versuchten, Gaddafi 1986 zu töten, schlug er zurück und sprengte Pan-Am-Flug 103 — 271 Zivilisten, 190 Amerikaner. Als wir versuchten, Milosevic 1999 zu degradieren, schickte er 30.000 Bodentruppen, um eine Million Zivilisten im Kosovo zu vertreiben. Immer und immer wieder.</p></div>
+
+                <div class="dialog"><div class="speaker host">Moderator</div>
+                <p class="utterance">Und jetzt greift der Iran die Nachbarländer an?</p></div>
+
+                <div class="dialog"><div class="speaker guest">Prof. Pape</div>
+                <p class="utterance">Ja, das ist Stufe zwei — horizontale Eskalation. Sie benutzen Drohnen, präzisionsgesteuert, gegen Saudi-Arabien, die VAE — die Koalition, die gegen sie gebildet wurde. Sie treffen Hotels, Flughäfen. Der Tourismus macht fünf bis zehn Prozent des BIP dieser Länder aus. Sie wollen, dass diese Länder die Amerikaner aus ihrem Land werfen. Und stellen Sie sich vor: Wir haben 500.000 amerikanische Staatsbürger dort, und das Außenministerium sagt im Fernsehen: Rufen Sie diese Nummer an, wir helfen Ihnen bei der Flucht.</p></div>
+
+                <div class="dialog"><div class="speaker host">Moderator</div>
+                <p class="utterance">Was ist Stufe drei?</p></div>
+
+                <div class="dialog"><div class="speaker guest">Prof. Pape</div>
+                <p class="utterance">Stufe drei: Der Konflikt wird global. Wir wissen immer noch nicht, wo das Nuklearmaterial ist. Und wir haben jetzt eine viel aggressivere Führung eingesetzt, die jeden Anreiz hat, die Bombe zu bauen. Wir töten sie bereits. Also — was genau ist ihr Anreiz, keine Atomwaffe zu haben? Ihr bester Weg zu überleben ist die Atombombe. Und dann stellt man sich die Fragen: Wird sie an die Hisbollah gehen? An die Huthis? Und das ist es, was uns zu Bodentruppen treiben wird. Die 82. Luftlandedivision — 5.000 Soldaten, die den Raum um Fordo kontrollieren sollen, wochenlang nach Material suchen, das tief vergraben ist.</p></div>
+
+                <div class="dialog"><div class="speaker host">Moderator</div>
+                <p class="utterance">Wie wahrscheinlich ist das — amerikanische Bodentruppen im Iran?</p></div>
+
+                <div class="dialog"><div class="speaker guest">Prof. Pape</div>
+                <p class="utterance">Mindestens 50 zu 50. Und die Leute erwarten, dass die Eskalation kontinuierlich ist. Wenn es eine Pause gibt, denken sie: Oh, es ist vorbei. Aber so funktioniert Eskalation nicht. Sie kann einen Ratscheneffekt haben — monatelange Pausen, die wie Frieden aussehen, und dann ist man wieder mittendrin. Wir hatten einen Deal — den Obama-Deal. Der Iran hat fast alles angereicherte Uran aus dem Land geschafft. Wir hatten 24-Stunden-Kameras, Vor-Ort-Inspektionen. 2018 hat Trump ihn einfach zerrissen. Und seitdem gibt der Iran Vollgas bei der Anreicherung. Und genau so kam man zu dem Material für 16 Bomben.</p></div>
+
+                <div class="dialog"><div class="speaker host">Moderator</div>
+                <p class="utterance">Wenn Trump zuhören würde — was würden Sie ihm sagen?</p></div>
+
+                <div class="dialog"><div class="speaker guest">Prof. Pape</div>
+                <p class="utterance">Nehmen Sie den Deal an. Hören Sie jetzt auf und tun Sie alles, um so viel angereichertes Uran wie möglich aus dem Land zu bekommen. Mein Ziel wäre: das auf 60 Prozent angereicherte Uran rausschaffen. Aber Sie werden wahrscheinlich keinen so guten Deal bekommen wie vorher, weil der Oberste Führer, mit dem Sie verhandelt haben, tot ist. Und Sie haben jetzt einen viel härteren Gegner. Manchmal ist die beste Lösung, ein Problem für 20 Jahre einzufrieren. Man hat keine hundertprozentige Sicherheit, aber wenn man ein Problem 20 Jahre lang einfrieren kann — das ist verdammt gut. Vielleicht hat man Glück. Vielleicht fällt das System von allein auseinander, wie die Sowjetunion. Diese Suche nach perfekter Sicherheit — so verlieren Großmächte Kriege.</p></div>
+
             </div>
-            <p class="source">Quelle: Adaptiert nach einem Interview mit Prof. Robert Pape (University of Chicago), The Diary of a CEO Podcast, 2025. Ins Deutsche übersetzt und für den DaF-Unterricht bearbeitet.</p>
+            <p class="source">Quelle: „The Diary of a CEO" Podcast mit Steven Bartlett, Interview mit Prof. Robert Pape (University of Chicago), 2025/26. Übersetzt und für den DaF-Unterricht bearbeitet.</p>
         </div>
     </div>
 
@@ -294,20 +351,20 @@ function timerReset(idx) { initTimer(idx); }
 // ═══════════════════════════════════════════════════════════════════════
 var GENUS_DATA = [
     { word: '💣 Konflikt', cat: 'der' },
-    { word: '🎯 Luftschlag', cat: 'der' },
     { word: '🔄 Regimewechsel', cat: 'der' },
-    { word: '🛡️ Verbündete', cat: 'pl' },
-    { word: '☢️ Uran', cat: 'das' },
-    { word: '📡 Satellitenbilder', cat: 'pl' },
-    { word: '🕊️ Abschreckung', cat: 'die' },
     { word: '🏨 Tourismus', cat: 'der' },
-    { word: '💥 Vergeltung', cat: 'die' },
-    { word: '🏛️ Koalition', cat: 'die' },
-    { word: '✈️ Drohne', cat: 'die' },
+    { word: '🎯 Angriff', cat: 'der' },
+    { word: '☢️ Uran', cat: 'das' },
     { word: '⚙️ Netzwerk', cat: 'das' },
-    { word: '🔬 Anreicherung', cat: 'die' },
+    { word: '🏛️ Regime', cat: 'das' },
+    { word: '📡 Satellitenbild', cat: 'das' },
     { word: '📜 Fatwa', cat: 'die' },
-    { word: '🧮 Bruttoinlandsprodukt', cat: 'das' }
+    { word: '✈️ Drohne', cat: 'die' },
+    { word: '🏛️ Koalition', cat: 'die' },
+    { word: '🔬 Anreicherung', cat: 'die' },
+    { word: '💥 Eskalation', cat: 'die' },
+    { word: '🛡️ Bodentruppen', cat: 'pl' },
+    { word: '🎯 Präzisionswaffen', cat: 'pl' }
 ];
 
 var draggedChip = null;
@@ -402,16 +459,16 @@ function showGenusLoesungen() {
 //  TAB 3: LÜCKENTEXT
 // ═══════════════════════════════════════════════════════════════════════
 var LUECKEN_DATA = [
-    { pre: 'Professor Pape hat 20 Jahre lang Kriegs', answer: 'simulationen', post: ' über einen möglichen Iran-Konflikt durchgeführt.', size: 'l' },
-    { pre: 'Bomben treffen Ziele, aber sie verändern die Politik ', answer: 'nicht', post: '.', size: 's' },
-    { pre: 'In der Ära der Präzisionswaffen konzentrieren sich die Medien auf den taktischen ', answer: 'Erfolg', post: ' einzelner Luftschläge.', size: 'm' },
-    { pre: 'Das angereicherte ', answer: 'Uran', post: ' blieb nach dem Angriff unauffindbar.', size: 's' },
-    { pre: 'Satellitenbilder zeigten, dass der Iran Lastwagen von den ', answer: 'Anlagen', post: ' wegfahren ließ.', size: 'm' },
-    { pre: 'Iranische Drohnenangriffe richteten sich gegen ', answer: 'Verbündete', post: ' in der Region.', size: 'l' },
-    { pre: 'Hotels, Flughäfen und Touristenziele wurden ', answer: 'getroffen', post: '.', size: 'm' },
-    { pre: 'Regime wie das iranische gleichen eher einer ', answer: 'Matrix', post: ' als einem Jenga-Turm.', size: 'm' },
-    { pre: 'Die religiöse Fatwa gegen Atomwaffen wurde vom neuen Führer nicht ', answer: 'erneuert', post: '.', size: 'm' },
-    { pre: 'Der Iran bereite sich seit Jahrzehnten auf Resilienz und asymmetrische ', answer: 'Vergeltung', post: ' vor.', size: 'l' }
+    { pre: 'Pape hat 20 Jahre lang ', answer: 'Simulationen', post: ' über einen Krieg mit dem Iran durchgeführt.', size: 'l' },
+    { pre: 'Bomben treffen nicht nur Ziele — sie verändern die ', answer: 'Politik', post: '.', size: 'm' },
+    { pre: 'Der ganze Sinn war nicht, ein Gebäude zu zerstören — es ging darum, an das angereicherte ', answer: 'Uran', post: ' zu kommen.', size: 's' },
+    { pre: 'Zwei Tage bevor wir Fordo bombardiert haben, fahren ', answer: 'Lastwagen', post: ' Sachen weg.', size: 'l' },
+    { pre: 'Der Oberste Führer hatte zwei ', answer: 'Fatwas', post: ' gegen Atomwaffen erlassen.', size: 'm' },
+    { pre: 'Sein Sohn ist bekannt dafür, viel ', answer: 'aggressiver', post: ' zu sein als der Vater.', size: 'l' },
+    { pre: 'Das iranische Regime ist eher wie eine ', answer: 'Matrix', post: ' — es passt sich an und füllt die Lücken.', size: 'm' },
+    { pre: 'Sie benutzen Drohnen gegen Saudi-Arabien und die VAE — das nennt Pape horizontale ', answer: 'Eskalation', post: '.', size: 'l' },
+    { pre: '2018 hat Trump den Obama-Deal einfach ', answer: 'zerrissen', post: '.', size: 'm' },
+    { pre: 'Manchmal ist die beste Lösung, ein Problem für 20 Jahre ', answer: 'einzufrieren', post: '.', size: 'l' }
 ];
 
 function liveCheck(inp) {
@@ -467,16 +524,16 @@ function showLueckenLoesungen() {
 //  TAB 4: MULTIPLE CHOICE
 // ═══════════════════════════════════════════════════════════════════════
 var MC_DATA = [
-    { q: '1. Was ist die Kernthese von Professor Pape?', opts: ['Moderne Waffen sind zu ungenau für gezielte Angriffe.', 'Bomben treffen Ziele, aber sie verändern die Politik nicht.', 'Luftschläge sind die effektivste Form der Kriegsführung.', 'Atomwaffen sind die einzige Lösung für den Iran-Konflikt.'], correct: 1 },
-    { q: '2. Was passierte, als die USA iranische Atomanlagen bombardierten?', opts: ['Der Iran kapitulierte sofort.', 'Die Bomben verfehlten alle Ziele.', 'Die Gebäude wurden zerstört, aber das Uran blieb unauffindbar.', 'Die Atomanlagen wurden vollständig neutralisiert.'], correct: 2 },
-    { q: '3. Was bedeutet „horizontale Eskalation"?', opts: ['Eine Ausweitung des Krieges auf den Weltraum', 'Die Verstärkung der eigenen Bodentruppen', 'Der Übergang von Drohnen zu konventionellen Flugzeugen', 'Angriffe gegen die Verbündeten des Gegners statt gegen den Gegner selbst'], correct: 3 },
-    { q: '4. Welches Ziel verfolgte der Iran mit Angriffen auf Saudi-Arabien und die VAE?', opts: ['Die Koalition gegen den Iran zu spalten', 'Die Ölpreise dauerhaft zu erhöhen', 'Die Bevölkerung dieser Länder zu terrorisieren', 'Militärbasen in diesen Ländern zu zerstören'], correct: 0 },
-    { q: '5. Warum vergleicht Pape das iranische Regime mit einer Matrix und nicht mit einem Jenga-Turm?', opts: ['Weil es aus virtuellen Strukturen besteht', 'Weil es sich an Verluste anpasst und sich reorganisiert', 'Weil es von außen nicht sichtbar ist', 'Weil es nur durch Technologie funktioniert'], correct: 1 },
-    { q: '6. Was war die religiöse Fatwa des alten Obersten Führers?', opts: ['Ein Aufruf zum heiligen Krieg gegen die USA', 'Ein Friedensangebot an Israel', 'Ein religiöses Edikt gegen iranische Atomwaffen', 'Ein Verbot westlicher Kultur im Iran'], correct: 2 },
-    { q: '7. Warum ist die Eliminierung des Obersten Führers laut Pape kontraproduktiv?', opts: ['Der alte Führer war der einzige Verbündete der USA im Iran.', 'Die Bevölkerung hat den Führer ohnehin nicht unterstützt.', 'Regime-Change ist nur bei demokratischen Staaten wirksam.', 'Sein Nachfolger ist aggressiver und die Fatwa gegen Atomwaffen ist erloschen.'], correct: 3 },
-    { q: '8. Über wie viel Material für Atombomben verfügte der Iran laut Pape?', opts: ['Material für 2 Bomben', 'Material für 100 Bomben', 'Material für 16 Bomben', 'Kein waffenfähiges Material'], correct: 2 },
-    { q: '9. Was geschah laut Satellitenbildern zwei Tage vor dem US-Angriff?', opts: ['Iran evakuierte die Zivilbevölkerung.', 'Lastwagen fuhren Material von den Atomanlagen weg.', 'Der Iran startete einen Gegenangriff.', 'Die Anlagen wurden unterirdisch verlegt.'], correct: 1 },
-    { q: '10. Welches historische Beispiel nennt Pape für die Eskalationsfalle?', opts: ['Den Zweiten Weltkrieg und die Bombardierung Dresdens', 'Den Vietnamkrieg und die Tet-Offensive', 'Den Koreakrieg und den Waffenstillstand von 1953', 'Die Bombardierung Libyens 1986 und den Anschlag auf Pan-Am-Flug 103'], correct: 3 }
+    { q: '1. Was ist laut Pape das Grundproblem mit Präzisionswaffen?', opts: ['Sie sind zu teuer für einen langen Krieg.', 'Sie treffen die Ziele, aber verändern nicht die Politik.', 'Sie können unterirdische Anlagen nicht zerstören.', 'Sie erfordern zu viele Bodentruppen.'], correct: 1 },
+    { q: '2. Warum verhandeln die USA nach der Bombardierung weiter mit dem Iran?', opts: ['Weil der Iran kapituliert hat und die Bedingungen klären will.', 'Weil die Bomben ihr eigentliches Ziel verfehlt haben — das angereicherte Uran fehlt.', 'Weil die USA einen Friedensvertrag unterzeichnen wollen.', 'Weil die Vereinten Nationen Verhandlungen angeordnet haben.'], correct: 1 },
+    { q: '3. Was zeigten die Satellitenbilder zwei Tage vor dem Angriff auf Fordo?', opts: ['Iranische Truppen in Kampfposition', 'Evakuierung der Zivilbevölkerung', 'Lastwagen, die Material von den Anlagen wegfuhren', 'Neue unterirdische Tunnelbauten'], correct: 2 },
+    { q: '4. Warum war die Fatwa des alten Obersten Führers so wichtig?', opts: ['Sie erlaubte dem Iran, Atomwaffen zu entwickeln.', 'Sie war ein religiöses Edikt gegen iranische Atomwaffen.', 'Sie verbot jede Zusammenarbeit mit dem Westen.', 'Sie rief zum Heiligen Krieg gegen Israel auf.'], correct: 1 },
+    { q: '5. Warum ist das Bild vom Jenga-Turm laut Pape falsch?', opts: ['Weil der Iran gar keine Führungsstruktur hat', 'Weil das Regime wie eine Matrix funktioniert — es passt sich an und füllt Lücken', 'Weil der Iran nur von einer einzigen Person geführt wird', 'Weil Jenga ein amerikanisches Spiel ist, das Iraner nicht kennen'], correct: 1 },
+    { q: '6. Was nennt Pape „horizontale Eskalation"?', opts: ['Die Vergrößerung der iranischen Armee', 'Angriffe auf die Nachbarländer und Verbündeten des Gegners', 'Die Ausweitung des Konflikts auf den Cyberraum', 'Den Einsatz von Bodentruppen statt Luftangriffen'], correct: 1 },
+    { q: '7. Was will der Iran mit den Drohnenangriffen auf die Golfstaaten erreichen?', opts: ['Die Ölproduktion vollständig stoppen', 'Territorien erobern', 'Dass diese Länder die Amerikaner aus ihrem Land werfen', 'Einen Weltkrieg auslösen'], correct: 2 },
+    { q: '8. Was passierte 2018 mit dem Obama-Deal?', opts: ['Obama hat ihn selbst aufgelöst.', 'Der Iran hat den Deal gebrochen.', 'Trump hat ihn einseitig zerrissen.', 'Der Deal lief planmäßig aus.'], correct: 2 },
+    { q: '9. Was ist laut Pape der größte Anreiz für den Iran, jetzt eine Atombombe zu bauen?', opts: ['Wirtschaftliche Vorteile durch Atomenergie', 'Die USA töten sie bereits — eine Bombe ist ihr bester Schutz.', 'China hat sie dazu aufgefordert.', 'Der neue Führer will seinen Vater übertreffen.'], correct: 1 },
+    { q: '10. Was empfiehlt Pape Präsident Trump?', opts: ['Sofort Bodentruppen entsenden.', 'Den Krieg auf China ausweiten.', 'Aufhören und verhandeln — so viel angereichertes Uran wie möglich aus dem Land schaffen.', 'Das iranische Regime durch eine Demokratie ersetzen.'], correct: 2 }
 ];
 
 function initMc() {
@@ -539,16 +596,16 @@ function showMcLoesungen() {
 //  TAB 5: SATZBAU
 // ═══════════════════════════════════════════════════════════════════════
 var satzbauData = [
-    { parts: ['Bomben', 'treffen', 'Ziele', ',', 'aber', 'sie', 'verändern', 'die', 'Politik', 'nicht'], valid: [['Bomben', 'treffen', 'Ziele', ',', 'aber', 'sie', 'verändern', 'die', 'Politik', 'nicht']], punct: '.' },
-    { parts: ['der', 'Iran', 'verfügte', 'über', 'genügend', 'Material', 'für', '16', 'Atombomben'], valid: [['der', 'Iran', 'verfügte', 'über', 'genügend', 'Material', 'für', '16', 'Atombomben']], punct: '.' },
-    { parts: ['Satellitenbilder', 'zeigten', ',', 'dass', 'Lastwagen', 'Material', 'von', 'den', 'Anlagen', 'wegfuhren'], valid: [['Satellitenbilder', 'zeigten', ',', 'dass', 'Lastwagen', 'Material', 'von', 'den', 'Anlagen', 'wegfuhren']], punct: '.' },
-    { parts: ['iranische', 'Drohnenangriffe', 'richteten', 'sich', 'gegen', 'Verbündete', 'in', 'der', 'Region'], valid: [['iranische', 'Drohnenangriffe', 'richteten', 'sich', 'gegen', 'Verbündete', 'in', 'der', 'Region']], punct: '.' },
-    { parts: ['das', 'Ziel', 'war', 'es', ',', 'die', 'Koalition', 'gegen', 'den', 'Iran', 'zu', 'spalten'], valid: [['das', 'Ziel', 'war', 'es', ',', 'die', 'Koalition', 'gegen', 'den', 'Iran', 'zu', 'spalten']], punct: '.' },
-    { parts: ['der', 'Tourismus', 'brach', 'in', 'den', 'betroffenen', 'Ländern', 'ein'], valid: [['der', 'Tourismus', 'brach', 'in', 'den', 'betroffenen', 'Ländern', 'ein']], punct: '.' },
-    { parts: ['Regime', 'wie', 'das', 'iranische', 'gleichen', 'eher', 'einer', 'Matrix'], valid: [['Regime', 'wie', 'das', 'iranische', 'gleichen', 'eher', 'einer', 'Matrix']], punct: '.' },
-    { parts: ['jeder', 'militärische', 'Schlag', 'erzeugt', 'eine', 'politische', 'Gegenreaktion'], valid: [['jeder', 'militärische', 'Schlag', 'erzeugt', 'eine', 'politische', 'Gegenreaktion']], punct: '.' },
-    { parts: ['die', 'religiöse', 'Fatwa', 'gegen', 'Atomwaffen', 'wurde', 'nicht', 'erneuert'], valid: [['die', 'religiöse', 'Fatwa', 'gegen', 'Atomwaffen', 'wurde', 'nicht', 'erneuert']], punct: '.' },
-    { parts: ['der', 'Iran', 'bereitet', 'sich', 'seit', 'Jahrzehnten', 'auf', 'asymmetrische', 'Vergeltung', 'vor'], valid: [['der', 'Iran', 'bereitet', 'sich', 'seit', 'Jahrzehnten', 'auf', 'asymmetrische', 'Vergeltung', 'vor']], punct: '.' }
+    { parts: ['Bomben', 'treffen', 'nicht', 'nur', 'Ziele', ',', 'sie', 'verändern', 'die', 'Politik'], valid: [['Bomben', 'treffen', 'nicht', 'nur', 'Ziele', ',', 'sie', 'verändern', 'die', 'Politik']], punct: '.' },
+    { parts: ['sie', 'hatten', 'Material', 'für', '16', 'Atombomben'], valid: [['sie', 'hatten', 'Material', 'für', '16', 'Atombomben']], punct: '.' },
+    { parts: ['wir', 'wissen', 'nicht', ',', 'wo', 'das', 'Nuklearmaterial', 'ist'], valid: [['wir', 'wissen', 'nicht', ',', 'wo', 'das', 'Nuklearmaterial', 'ist']], punct: '.' },
+    { parts: ['zwei', 'Tage', 'vor', 'dem', 'Angriff', 'fuhren', 'Lastwagen', 'Material', 'weg'], valid: [['zwei', 'Tage', 'vor', 'dem', 'Angriff', 'fuhren', 'Lastwagen', 'Material', 'weg']], punct: '.' },
+    { parts: ['die', 'Fatwa', 'ist', 'mit', 'dem', 'Vater', 'gestorben'], valid: [['die', 'Fatwa', 'ist', 'mit', 'dem', 'Vater', 'gestorben']], punct: '.' },
+    { parts: ['das', 'iranische', 'Regime', 'ist', 'eher', 'wie', 'eine', 'Matrix'], valid: [['das', 'iranische', 'Regime', 'ist', 'eher', 'wie', 'eine', 'Matrix']], punct: '.' },
+    { parts: ['sie', 'wollen', ',', 'dass', 'diese', 'Länder', 'die', 'Amerikaner', 'rauswerfen'], valid: [['sie', 'wollen', ',', 'dass', 'diese', 'Länder', 'die', 'Amerikaner', 'rauswerfen']], punct: '.' },
+    { parts: ['ihr', 'bester', 'Weg', 'zu', 'überleben', 'ist', 'die', 'Atombombe'], valid: [['ihr', 'bester', 'Weg', 'zu', 'überleben', 'ist', 'die', 'Atombombe']], punct: '.' },
+    { parts: ['2018', 'hat', 'Trump', 'den', 'Obama-Deal', 'einfach', 'zerrissen'], valid: [['2018', 'hat', 'Trump', 'den', 'Obama-Deal', 'einfach', 'zerrissen']], punct: '.' },
+    { parts: ['manchmal', 'ist', 'die', 'beste', 'Lösung', ',', 'ein', 'Problem', 'für', '20', 'Jahre', 'einzufrieren'], valid: [['manchmal', 'ist', 'die', 'beste', 'Lösung', ',', 'ein', 'Problem', 'für', '20', 'Jahre', 'einzufrieren']], punct: '.' }
 ];
 
 var sbDragged = null;
