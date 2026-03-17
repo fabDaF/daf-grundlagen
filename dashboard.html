@@ -15,9 +15,18 @@
       --a21-color: #27ae60;
       --a21-dark:  #1e8449;
       --a21-light: #d5f5e3;
+      --a22-color: #00897b;
+      --a22-dark:  #00695c;
+      --a22-light: #e0f2f1;
       --grund-color: #9c27b0;
       --grund-dark:  #7b1fa2;
       --grund-light: #f3e5f5;
+      --lueck-color: #e67e22;
+      --lueck-dark:  #d35400;
+      --lueck-light: #fef5e7;
+      --arch-color: #5c6bc0;
+      --arch-dark:  #3949ab;
+      --arch-light: #e8eaf6;
       --text-dark: #1a1a2e;
       --bg: #f4f6fb;
       --radius: 12px;
@@ -68,7 +77,10 @@
     .niveau-a11 > .niveau-header { background: linear-gradient(135deg, var(--a11-color), var(--a11-dark)); color: #3a2010; }
     .niveau-a12 > .niveau-header { background: linear-gradient(135deg, var(--a12-color), var(--a12-dark)); color: #fff; }
     .niveau-a21 > .niveau-header { background: linear-gradient(135deg, var(--a21-color), var(--a21-dark)); color: #fff; }
+    .niveau-a22 > .niveau-header { background: linear-gradient(135deg, var(--a22-color), var(--a22-dark)); color: #fff; }
     .niveau-grund > .niveau-header { background: linear-gradient(135deg, var(--grund-color), var(--grund-dark)); color: #fff; }
+    .niveau-lueck > .niveau-header { background: linear-gradient(135deg, var(--lueck-color), var(--lueck-dark)); color: #fff; }
+    .niveau-arch > .niveau-header { background: linear-gradient(135deg, var(--arch-color), var(--arch-dark)); color: #fff; }
 
     /* ── NIVEAU-BODY ── */
     .niveau-body { display: none; background: #fff; padding: 0.7rem 0.8rem; }
@@ -87,7 +99,10 @@
     }
     .niveau-a11 .einheit-header { background: #fdf8f3; }
     .niveau-a21 .einheit-header { background: #f0faf4; }
+    .niveau-a22 .einheit-header { background: #e8f5f3; }
     .niveau-grund .einheit-header { background: #faf3fc; }
+    .niveau-lueck .einheit-header { background: #fef9f2; }
+    .niveau-arch .einheit-header { background: #eef0fa; }
 
     .einheit-header:hover { filter: brightness(0.97); }
     .einheit-header .chv { margin-left: auto; font-size: 0.85rem; transition: transform 0.2s; }
@@ -111,6 +126,7 @@
     .niveau-a11 .btn-einheit-senden { background: var(--a11-color); color: #3a2010; }
     .niveau-a12 .btn-einheit-senden { background: var(--a12-color); color: #fff; }
     .niveau-a21 .btn-einheit-senden { background: var(--a21-color); color: #fff; }
+    .niveau-a22 .btn-einheit-senden { background: var(--a22-color); color: #fff; }
     .niveau-grund .btn-einheit-senden { background: var(--grund-color); color: #fff; }
 
     /* ── EINHEIT-BODY ── */
@@ -127,6 +143,7 @@
     .karte:hover { background: #f9faff; }
     .niveau-a11 .karte:hover { background: #fdf6ee; }
     .niveau-a21 .karte:hover { background: #eafaf1; }
+    .niveau-a22 .karte:hover { background: #e0f2f1; }
     .niveau-grund .karte:hover { background: #faf3fc; }
 
     .karte-typ {
@@ -146,6 +163,11 @@
     .karte-titel { flex: 1; font-size: 0.88rem; }
 
     .karte-aktionen { display: flex; gap: 0.4rem; margin-left: auto; flex-shrink: 0; }
+    /* ── TEST-BADGE ── */
+    .test-badge { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.65rem; font-weight: 600; padding: 2px 8px; border-radius: 12px; margin-left: 8px; flex-shrink: 0; }
+    .test-badge.bestanden { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+    .test-badge.fehler { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+    .test-badge .badge-detail { font-weight: 400; opacity: 0.8; }
 
     .btn-oeffnen {
       padding: 4px 13px; border-radius: 12px; border: none;
@@ -157,6 +179,7 @@
     .niveau-a11 .btn-oeffnen { background: var(--a11-color); color: #3a2010; }
     .niveau-a12 .btn-oeffnen { background: var(--a12-color); color: #fff; }
     .niveau-a21 .btn-oeffnen { background: var(--a21-color); color: #fff; }
+    .niveau-a22 .btn-oeffnen { background: var(--a22-color); color: #fff; }
     .niveau-grund .btn-oeffnen { background: var(--grund-color); color: #fff; }
 
     .btn-mail {
@@ -343,14 +366,6 @@ const KURSE = [
         { typ:'X', label:'X – Kommunikation', titel:'Eine To-do-Liste',                        file:'DE_A1_1122X-eine-to-do-liste.html' },
         { typ:'G', label:'G – Grammatik',  titel:'Die Modalverben',                             file:'DE_A1_1123G-die-modalverben.html' },
         { typ:'C', label:'C – Lerncheck',  titel:'Ich kann eine To-do-Liste schreiben',         file:'DE_A1_1124C-ich-kann-eine-to-do-liste-schreiben.html' },
-        { typ:'W', label:'W – Lückentext', titel:'Lückentexte A01–A05',                        file:'lueckentexte-teil-a-01-05.html' },
-        { typ:'W', label:'W – Lückentext', titel:'Lückentexte A06–A10',                        file:'lueckentexte-teil-a-06-10.html' },
-        { typ:'W', label:'W – Lückentext', titel:'Lückentexte A11–A15',                        file:'lueckentexte-teil-a-11-15.html' },
-        { typ:'W', label:'W – Lückentext', titel:'Lückentexte A16–A20',                        file:'lueckentexte-teil-a-16-20.html' },
-        { typ:'W', label:'W – Lückentext', titel:'Lückentexte B01–B05',                        file:'lueckentexte-teil-b-01-05.html' },
-        { typ:'W', label:'W – Lückentext', titel:'Lückentexte B06–B10',                        file:'lueckentexte-teil-b-06-10.html' },
-        { typ:'W', label:'W – Lückentext', titel:'Lückentexte B11–B15',                        file:'lueckentexte-teil-b-11-15.html' },
-        { typ:'W', label:'W – Lückentext', titel:'Lückentexte B16–B20',                        file:'lueckentexte-teil-b-16-20.html' },
         { typ:'G', label:'G – Grammatik',  titel:'Partizip II als Adjektiv',                   file:'partizip2-als-adjektiv-uebungen.html' },
         { typ:'C', label:'C – Lerncheck',  titel:'Lernziele A1.1 erreicht',                    file:'DE_A1_1131C-lernziele-a1.1-erreicht.html' },
       ]},
@@ -469,6 +484,69 @@ const KURSE = [
     ]
   },
   {
+    id: 'a22', label: 'A2.2',
+    titel: 'Deutsch A2.2 – Mittelstufe II',
+    basis: 'https://fabdaf.github.io/daf-a2-2-uebungen/',
+    einheiten: [
+      { nr:'Einheit 1', titel:'Sinneswahrnehmungen & Essen', karten: [
+        { typ:'V', label:'V – Wortschatz',    titel:'2011V · Sinneswahrnehmungen',              file:'DE_A2_2011V-sinneswahrnehmungen.html' },
+        { typ:'X', label:'X – Extra-Übungen', titel:'2012X · Im Feinkostladen',                 file:'DE_A2_2012X-im-feinkostladen.html' },
+        { typ:'G', label:'G – Grammatik',     titel:'2013G · Indirekte Rede',                   file:'DE_A2_2013G-indirekte-rede.html' },
+        { typ:'R', label:'R – Lesetext',      titel:'2014R · Ein neuer Ernährungsplan',          file:'DE_A2_2014R-ein-neuer-ernaehrungsplan.html' },
+        { typ:'V', label:'V – Wortschatz',    titel:'2015V · Deutsches Essen',                  file:'DE_A2_2015V-deutsches-essen.html' },
+        { typ:'X', label:'X – Extra-Übungen', titel:'2016X · Rezepte',                          file:'DE_A2_2016X-rezepte.html' },
+        { typ:'G', label:'G – Grammatik',     titel:'2017G · Das Passiv',                       file:'DE_A2_2017G-passiv.html' },
+        { typ:'S', label:'S – Sprechen',      titel:'2018S · Eine Unterhaltung über Essen',      file:'DE_A2_2018S-eine-unterhaltung-ueber-essen.html' },
+      ]},
+      { nr:'Einheit 2', titel:'Reisen & Sehenswürdigkeiten', karten: [
+        { typ:'V', label:'V – Wortschatz',    titel:'2021V · Reisen und Sehenswürdigkeiten',     file:'DE_A2_2021V-reisen-und-sehenswuerdigkeiten.html' },
+        { typ:'X', label:'X – Extra',         titel:'2022X · Mein letzter Urlaub',               file:'DE_A2_2022X-mein-letzter-urlaub.html' },
+        { typ:'G', label:'G – Grammatik',     titel:'2023G · Position Konnektoren',               file:'DE_A2_2023G-position-konnektoren.html' },
+        { typ:'R', label:'R – Lesen',          titel:'2024R · Mein bester Urlaub',                  file:'DE_A2_2024R-mein-bester-urlaub.html' },
+        { typ:'V', label:'V – Wortschatz',    titel:'2025V · Gespräche im Hotel',                  file:'DE_A2_2025V-gespraeche-im-hotel.html' },
+        { typ:'X', label:'X – Extra',         titel:'2026X · Versteh mich nicht falsch',            file:'DE_A2_2026X-versteh-mich-nicht-falsch.html' },
+        { typ:'G', label:'G – Grammatik',     titel:'2027G · Lokal- und Direktionaladverbien',      file:'DE_A2_2027G-lokal-direktionaladverbien.html' },
+        { typ:'S', label:'S – Sprechen',      titel:'2028S · Erzähl von deinen Reisen',             file:'DE_A2_2028S-erzaehl-von-deinen-reisen.html' },
+      ]},
+      { nr:'Einheit 3', titel:'Dienstleistungen & Kleidung', karten: [
+        { typ:'V', label:'V – Wortschatz',    titel:'2031V · Dienstleistungen erwerben',            file:'DE_A2_2031V-dienstleistungen-erwerben.html' },
+        { typ:'X', label:'X – Extra',         titel:'2032X · Was soll ich anziehen?',               file:'DE_A2_2032X-was-soll-ich-anziehen.html' },
+        { typ:'G', label:'G – Grammatik',     titel:'2033G · Das Präteritum',                       file:'DE_A2_2033G-praeteritum.html' },
+        { typ:'R', label:'R – Lesetext',      titel:'2034R · Eine Woche voller Missgeschicke',      file:'DE_A2_2034R-eine-woche-voller-missgeschicke.html' },
+        { typ:'V', label:'V – Wortschatz',    titel:'2035V · Das Geld',                             file:'DE_A2_2035V-das-geld.html' },
+        { typ:'X', label:'X – Extra',         titel:'2036X · Beim Einwohnermeldeamt',               file:'DE_A2_2036X-beim-einwohnermeldeamt.html' },
+        { typ:'G', label:'G – Grammatik',     titel:'2037G · Modalpartikeln',                       file:'DE_A2_2037G-modalpartikeln.html' },
+        { typ:'S', label:'S – Sprechen',      titel:'2038S · Unterhaltung über Kleidung und Dienstleistungen', file:'DE_A2_2038S-unterhaltung-kleidung-dienstleistungen.html' },
+      ]},
+      { nr:'Einheit 4', titel:'Ausbildung & Biografie', karten: [
+        { typ:'V', label:'V – Wortschatz',    titel:'2041V · Die Ausbildung',                    file:'DE_A2_2041V-die-ausbildung.html' },
+        { typ:'X', label:'X – Extra',         titel:'2042X · Einen Lebenslauf schreiben',        file:'DE_A2_2042X-einen-lebenslauf-schreiben.html' },
+        { typ:'G', label:'G – Grammatik',     titel:'2043G · Konjunktiv II',                     file:'DE_A2_2043G-konjunktiv-II.html' },
+        { typ:'R', label:'R – Lesetext',      titel:'2044R · Hermines Geschichte',               file:'DE_A2_2044R-hermines-geschichte.html' },
+        { typ:'V', label:'V – Wortschatz',    titel:'2045V · Meine Biografie',                   file:'DE_A2_2045V-meine-biografie.html' },
+        { typ:'X', label:'X – Extra',         titel:'2046X · Finalsätze',                        file:'DE_A2_2046X-finalsaetze.html' },
+        { typ:'G', label:'G – Grammatik',     titel:'2047G · Kasus-Wiederholung',                file:'DE_A2_2047G-kasus-wiederholung.html' },
+        { typ:'S', label:'S – Sprechen',      titel:'2048S · Mein Werdegang',                    file:'DE_A2_2048S-mein-werdegang.html' },
+      ]},
+      { nr:'Einheit 5', titel:'Technologie & Medien', karten: [
+        { typ:'V', label:'V – Wortschatz',    titel:'2051V · Technologie',                       file:'DE_A2_2051V-technologie.html' },
+        { typ:'X', label:'X – Extra',         titel:'2052X · Eine E-Mail schreiben',             file:'DE_A2_2052X-email-schreiben.html' },
+        { typ:'G', label:'G – Grammatik',     titel:'2053G · Indefinitpronomen',                 file:'DE_A2_2053G-indefinitpronomen.html' },
+        { typ:'R', label:'R – Lesetext',      titel:'2054R · Soziale Netzwerke',                 file:'DE_A2_2054R-soziale-netzwerke.html' },
+        { typ:'V', label:'V – Wortschatz',    titel:'2055V · Medien',                            file:'DE_A2_2055V-medien.html' },
+        { typ:'X', label:'X – Extra',         titel:'2056X · Auf dem Laufenden bleiben',         file:'DE_A2_2056X-auf-dem-laufenden-bleiben.html' },
+        { typ:'G', label:'G – Grammatik',     titel:'2057G · Der Genitiv',                       file:'DE_A2_2057G-genitiv.html' },
+        { typ:'S', label:'S – Sprechen',      titel:'2058S · Medien und Technologie',             file:'DE_A2_2058S-medien-und-technologie.html' },
+      ]},
+      { nr:'Einheit 6', titel:'Wanderlust & Natur', karten: [
+        { typ:'V', label:'V – Wortschatz',    titel:'2061V · Die Wanderlust',                    file:'DE_A2_2061V-die-wanderlust.html' },
+        { typ:'X', label:'X – Extra',          titel:'2062X · Häufige Präfixe von Verben',         file:'DE_A2_2062X-haeufige-praefixe-von-verben.html' },
+        { typ:'G', label:'G – Grammatik',      titel:'2063G · Verben mit fester Präposition',        file:'DE_A2_2063G-verben-mit-fester-praeposition.html' },
+        { typ:'R', label:'R – Lesetext',       titel:'2064R · In der Natur',                          file:'DE_A2_2064R-in-der-natur.html' },
+      ]},
+    ]
+  },
+  {
     id: 'grund', label: 'Grundlagen',
     titel: 'Niveauübergreifende Grundlagen',
     basis: 'https://fabdaf.github.io/daf-grundlagen/',
@@ -484,6 +562,7 @@ const KURSE = [
         { typ:'G', label:'G – Grammatik', titel:'Modalsätze: Instrumental & Komparativ (B2)',      file:'Grundlagen/Grammatik/modalsaetze-instrumental-komparativ.html' },
         { typ:'G', label:'G – Grammatik', titel:'Modalsätze: Restriktiv & Substitutiv (B2)',       file:'Grundlagen/Grammatik/modalsaetze-restriktiv-substitutiv.html' },
         { typ:'G', label:'G – Grammatik', titel:'Partizip II – Die 100 häufigsten Verben',          file:'Grundlagen/Grammatik/partizip2-bildung-100verben.html' },
+        { typ:'G', label:'G – Grammatik', titel:'Kausale & konsekutive Konnektoren (B1)',          file:'Grundlagen/Grammatik/konnektoren-kausal-konsekutiv.html', badge:'bestanden', badgeInfo:'5/5 Tabs · 17.03.2026' },
       ]},
       { nr: 'Kollokationen', titel: 'Kollokationen (B1+)', karten: [
         { typ:'V', label:'V – Wortschatz', titel:'Teil 1 – Bewusstmachung',                       file:'Grundlagen/Kollokationen/kollokationen-teil1-bewusstmachung.html' },
@@ -505,6 +584,8 @@ const KURSE = [
         { typ:'R', label:'R – Lesetext', titel:'Das Trolley-Problem',                               file:'Texte und Lesen/trolley_vollversion.html' },
         { typ:'R', label:'R – Lesetext', titel:'Verbraucherzentrale',                               file:'Texte und Lesen/verbraucherzentrale_komplett.html' },
         { typ:'R', label:'R – Lesetext', titel:'Bikman (Teil 3)',                                    file:'Texte und Lesen/Bikman 3.html' },
+        { typ:'R', label:'R – Lesetext', titel:'Die Eskalationsfalle (B2)',                           file:'Texte und Lesen/DE_B2_Eskalationsfalle-Iran.html' },
+        { typ:'R', label:'R – Lesetext', titel:'Chinas Aufstieg (B2)',                                file:'Texte und Lesen/DE_B2_Chinas-Aufstieg.html' },
       ]},
       { nr: 'Sachbuch', titel: 'Warum wir krank werden (B2)', karten: [
         { typ:'R', label:'R – Lesetext', titel:'Geleitwort',                                        file:'Warum wir krank werden/geleitwort_voll.html' },
@@ -512,6 +593,36 @@ const KURSE = [
         { typ:'R', label:'R – Lesetext', titel:'Kapitel 1, Teil 2',                                  file:'Warum wir krank werden/kap1_teil2_voll.html' },
         { typ:'R', label:'R – Lesetext', titel:'Kapitel 1, Teil 3',                                  file:'Warum wir krank werden/kap1_teil3_voll.html' },
         { typ:'R', label:'R – Lesetext', titel:'Kapitel 2 – Herzgesundheit',                        file:'Warum wir krank werden/kap2_herzgesundheit_voll.html' },
+      ]},
+    ]
+  },
+  {
+    id: 'lueck', label: 'Lückentexte',
+    titel: 'Lückentexte Mattmüller',
+    basis: 'https://fabdaf.github.io/daf-lueckentexte/',
+    einheiten: [
+      { nr: 'Teil A', titel: 'Lückentexte A01–A20', karten: [
+        { typ:'W', label:'W – Lückentext', titel:'Lückentexte A01–A02', file:'lueckentexte-teil-a-01-02.html' },
+        { typ:'W', label:'W – Lückentext', titel:'Lückentexte A01–A05', file:'lueckentexte-teil-a-01-05.html' },
+        { typ:'W', label:'W – Lückentext', titel:'Lückentexte A06–A10', file:'lueckentexte-teil-a-06-10.html' },
+        { typ:'W', label:'W – Lückentext', titel:'Lückentexte A11–A15', file:'lueckentexte-teil-a-11-15.html' },
+        { typ:'W', label:'W – Lückentext', titel:'Lückentexte A16–A20', file:'lueckentexte-teil-a-16-20.html' },
+      ]},
+      { nr: 'Teil B', titel: 'Lückentexte B01–B20', karten: [
+        { typ:'W', label:'W – Lückentext', titel:'Lückentexte B01–B05', file:'lueckentexte-teil-b-01-05.html' },
+        { typ:'W', label:'W – Lückentext', titel:'Lückentexte B06–B10', file:'lueckentexte-teil-b-06-10.html' },
+        { typ:'W', label:'W – Lückentext', titel:'Lückentexte B11–B15', file:'lueckentexte-teil-b-11-15.html' },
+        { typ:'W', label:'W – Lückentext', titel:'Lückentexte B16–B20', file:'lueckentexte-teil-b-16-20.html' },
+      ]},
+    ]
+  },
+  {
+    id: 'arch', label: 'Architektur',
+    titel: 'Deutsch für Architekten und Bauingenieure (B1+)',
+    basis: 'https://fabdaf.github.io/daf-architektur/',
+    einheiten: [
+      { nr: 'Kapitel 4', titel: 'Bauprojektarten', karten: [
+        { typ:'R', label:'R – Lesetext', titel:'Bauprojektarten – Interaktiv', file:'Bauprojektarten-Interaktiv.html' },
       ]},
     ]
   }
@@ -523,6 +634,7 @@ const TYP_CSS = { V:'tv', G:'tg', X:'tx', C:'tc', R:'tr', W:'tw', S:'ts' };
 const LOCAL_BASE = window.location.href.replace(/\/[^/]*$/, '/');
 
 function resolveUrl(basis, file) {
+  if (file.startsWith('http')) return file;
   if (basis) return basis + encodeURI(file);
   return LOCAL_BASE + encodeURI(file);
 }
@@ -569,6 +681,7 @@ function render() {
           <div class="karte">
             <span class="karte-typ ${TYP_CSS[k.typ]||'tv'}">${k.label}</span>
             <span class="karte-titel">${k.titel}</span>
+            ${k.badge ? `<div class="test-badge ${k.badge==='bestanden'?'bestanden':'fehler'}">${k.badge==='bestanden'?'✅ Geprüft':'❌ Fehler'} <span class="badge-detail">· ${k.badgeInfo||''}</span></div>` : ''}
             <div class="karte-aktionen">
               <a class="btn-oeffnen" href="${url}" target="_blank">Öffnen</a>
               <button class="btn-mail" onclick="oeffneModal('${tEsc}','${uEsc}')">✉</button>
